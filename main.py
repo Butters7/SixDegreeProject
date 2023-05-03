@@ -2,7 +2,7 @@
 import networkx as nx
 import tkinter as tk
 
-# Определяем класс для людей
+# Определяем класс для нелюдей
 class Person:
     def __init__(self, name):
         self.name = name
@@ -10,7 +10,6 @@ class Person:
 
     def add_connection(self, person):
         self.connections.append(person)
-
 # Определяем класс приложения
 class SixDegreesApp:
     def __init__(self):
@@ -72,6 +71,10 @@ app.add_person("Андрей")
 app.add_person("Борис")
 app.add_person("Василий")
 app.add_person("Галина")
+app.add_person("Дмитрий")
+app.add_person("Дмитрий")
+app.add_person("Путин")
+app.add_person("Дмитрий")
 app.add_person("Дмитрий")
 app.add_connection("Андрей", "Борис")
 app.add_connection("Борис", "Василий")
