@@ -99,16 +99,20 @@ class SixDegreesApp:
     def popopo(self, first_id):
 
         data = self.get_data_from_response(first_id)
-
         self.update_amount(first_id, data)
 
-        id2 = data[2]
-        id3 = data[3]
-        data = self.get_data_from_response(id2)
-        self.update_amount(id2, data)
+        for i in range(len(data) - 350):
+            new_id = data[i]
+            new_data = self.get_data_from_response(new_id)
+            self.update_amount(new_id, data)
 
-        data = self.get_data_from_response(id3)
-        self.update_amount(id3, data)
+        # id2 = data[2]
+        # id3 = data[3]
+        # data = self.get_data_from_response(id2)
+        # self.update_amount(id2, data)
+
+        # data = self.get_data_from_response(id3)
+        # self.update_amount(id3, data)
         
 
 # vk
