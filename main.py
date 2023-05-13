@@ -71,11 +71,11 @@ class SixDegreesApp:
         except nx.exception.NetworkXNoPath:
             self.exceptions += 1
 
-        
+    
 
     # Метод для запуска приложения
-    def run(self, name1, name2):
-        self.find_shortest_path(name1, name2)
+    # def run(self, name1, name2):
+    #     self.find_shortest_path(name1, name2)
 
     def create_response(self, first_id):
         return requests.get('https://api.vk.com/method/friends.get',
@@ -95,16 +95,25 @@ class SixDegreesApp:
             return 'private'
 
 
+    def get_average(self):
+        for node1 in self.graph.nodes:
+            for node2 in self.graph.nodes:
+                key_nodes = f'{node1.name}<->{node2.name}'
+                if key_nodes not in self.connections and node1.name != node2.name:
+                    self.find_shortest_path(node1.name, node2.name)
+        return sum(self.connections.values()) / len(self.connections)
+                    
+
     # from vk
     def popopo(self, first_id):
 
         data = self.get_data_from_response(first_id)
         self.update_amount(first_id, data)
 
-        for i in range(len(data) - 350):
+        for i in range(len(data) - 382):
             new_id = data[i]
             new_data = self.get_data_from_response(new_id)
-            self.update_amount(new_id, data)
+            self.update_amount(new_id, new_data)
 
         # id2 = data[2]
         # id3 = data[3]
@@ -128,20 +137,7 @@ popo = 1
 # Создаем экземпляр приложения
 app = SixDegreesApp()
 
-# Добавляем людей и связи между ними
-app.add_person("Андрей")
-app.add_person("Борис")
-app.add_person("Василий")
-app.add_person("Галина")
-app.add_person("Дмитрий")
-app.add_person("Дмитрий")
-app.add_person("Путин")
-app.add_person("Дмитрий")
-app.add_person("Дмитрий")
-app.add_connection("Андрей", "Борис")
-app.add_connection("Борис", "Василий")
-app.add_connection("Василий", "Галина")
-app.add_connection("Галина", "Дмитрий")
+
 
 
 # З
@@ -149,3 +145,29 @@ app.add_connection("Галина", "Дмитрий")
 
 app.popopo(first_id)
 print(len(app.connections))
+print(len(app.graph.nodes))
+
+print(app.get_average())
+print(len(app.connections))
+
+
+
+# для каждой ноды по каждой ноде
+
+# def find_shortest_path    {
+# # проверить есть ли связь в словаре
+# если есть то вернуть кол-во рукопожатий
+
+# если нет то найти кол-во рукопожатий
+# добавить в словарь данную связь 
+
+
+# посчитать среднее из всех значений в словаре
+
+
+# вопросы:
+# мнение о кол-ве взятых людей 
+# можно ли пользоваться библиотекой нетворкикс
+# как находить расстояния и избежать факториального времени
+
+# popo = [1, 2, 3]
