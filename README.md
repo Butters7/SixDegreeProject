@@ -1,1 +1,1 @@
-![My Image](./7degree/qwe4.png)
+![My Image](./7degree/qwe5.jpg)
